@@ -1,8 +1,7 @@
 import requests
 
 session = requests.Session()
-session.headers = {"X-Apikey": "Your VT Api Key"}
-
+session.headers = {"X-Apikey": "Your api key"}
 
 ioc_list = open("ioc_list.txt", "r")
 IoC = ioc_list.readlines()
