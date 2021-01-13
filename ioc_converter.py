@@ -1,11 +1,13 @@
 import requests
 
+keyfile = open("key", "r")
+key = keyfile.read().strip()
+
 session = requests.Session()
-session.headers = {"X-Apikey": "Your api key"}
+session.headers = {"X-Apikey": key}
 
 ioc_list = open("ioc_list.txt", "r")
 IoC = ioc_list.readlines()
-
 
 for ioc in IoC:
     url = "https://www.virustotal.com/api/v3/files/" + ioc.strip()
@@ -18,5 +20,7 @@ for ioc in IoC:
             + " is: "
             + jsonResponse["data"]["attributes"]["md5"]
         )
+    except requests.exceptions.RequestException as e:
+        print(e)
     except:
         print("MD5 not found for: " + ioc.strip())
